@@ -2,17 +2,38 @@
     <div class ="coupon-form">
         <h4 class ="coupon-form__title">Coupon/Gift Card</h4>
         <form class ="coupon-form__form" @submit="submitCouponForm">
-            <input class ="coupon-form__input" type="text" placeholder="Enter code here">
+            <input class ="coupon-form__input" type="text" v-model="couponCode" placeholder="Enter code here">
             <input class ="coupon-form__submit" type="submit" value = "Confirm">
         </form>
     </div>
 </template>
 
 <script setup>
+    import DataService from '../utils/DataServices.js';
+    import { ref} from 'vue';
+    let couponCode = ref('');
+    let loadingData = ref(false);
+    const DataServices = new DataService();
 
+    const props = defineProps({
+        basketID: {
+            type: Number,
+            default: null
+        }
+    });
+
+    console.log(props.basketID);
     const submitCouponForm = (e) => {
         e.preventDefault();
-        console.log("Coupon form submitted");
+        loadingData.value = true;   
+        DataServices.post(`/api/basket/${props.basketID}/coupon`, {code: couponCode.value})
+            .then(response => {
+              loadingData.value = false;
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        
     }
 
 </script>

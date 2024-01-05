@@ -5,32 +5,39 @@ export default class DataService {
             const response = await fetch(endpoint);
             const data = await response.json();
             if(data){
-                return data;
+                return {
+                    success: true,
+                    data: data,
+                    message: "Data fetched successfully",
+                };
+                
             }
         } catch (error) {
-            return error;
+            return {
+                success: false,
+                message: error.message
+            }
         }
     }
 
-    async post(route, data, callback, errorCallback) {
+    async post(endpoint, data) {
         try {
-            const response = await fetch(route, {
+            const response = await fetch(endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(data)
             });
+
             const responseData = await response.json();
 
-            if (typeof callback === 'function') {
-                callback(responseData);
-            }
         } catch (error) {
-
-            if (typeof errorCallback === 'function') {
-                errorCallback(error);
-            }
+            return {
+                success: false,
+                message: error.message
+            };
+            
         }
     }
 }

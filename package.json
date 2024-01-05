@@ -12,7 +12,10 @@
   "dependencies": {
     "@formkit/vue": "^1.4.0",
     "fastify": "^4.24.3",
-    "vue": "^3.3.8"
+    "pinia": "^2.1.7",
+    "vue": "^3.3.8",
+    "vue-the-mask": "^0.11.1",
+    "vue-toast-notification": "^3.1.2"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.5.0",

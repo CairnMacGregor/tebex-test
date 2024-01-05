@@ -1,6 +1,6 @@
 <template>
     <section :class="{'payment-form': true, 'disabled': disabled}">
-        <!-- ... other code -->
+        <h4 class = "payment-form__title"><span class = "payment-form__title--colored">Make Payment</span><img src = "/img/arrow.svg" class = "payment-form__title--arrow">Order Confirmed</h4>
         <FormKit 
             type="form"  
             :actions="false"
@@ -16,30 +16,36 @@
                   required: 'Please enter your email address.'}"
             />
             <FormKit
-                type="text"
+                type="tel"
                 label="Card number*"
+                autocomplete="cc-number" 
+                placeholder="Card Number"
                 validation="required"
-                placeholder="MM/YY"
+                v-mask="'#### #### #### ####'"
                 :validation-messages="{
-                  required: 'Please enter your email address.'}"
+                  required: 'Please enter your card number.'}"
             />
             <div class="form-group">
                 <FormKit
                     type="text"
                     label="Expiry Date*"
                     validation="required"
-                    placeholder="Enter your email address"
+                    placeholder="MM/YY"
+                    v-mask="'##/##'"
                     :validation-messages="{
-                      required: 'Please enter your email address.'}"
+                      required: 'Please enter your card\'s expiry date.'
+                    }"
                 />
                 <FormKit
-                    type="number"
+                    type="text"
                     label="CVC/CVV*"
                     validation="required"
                     placeholder="123"
                     step="0"
+                    maxlength="4"
+                    v-mask="'####'"
                     :validation-messages="{
-                      required: 'Please enter your email address.'}"
+                      required: 'Please enter your CVC/CVV number.'}"
                 />
                 <FormKit
                     type="text"
@@ -47,7 +53,7 @@
                     validation="required"
                     placeholder="PO12 1AB"
                     :validation-messages="{
-                      required: 'Please enter your email address.'}"
+                      required: 'Please enter your Zip/Postcode.'}"
                 />
             </div>
             <FormKit
@@ -67,9 +73,12 @@
 </template>
 
 <script setup>
+    import { defineProps, ref, watch } from 'vue';
+
     const props = defineProps({
         disabled: Boolean
     });
+
 </script>
 
 <style lang = "scss">
@@ -87,6 +96,20 @@
                 }
             }
         }
+
+        .formkit-form{
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+
+            .form-group{
+                display: grid;
+                gap: 12px;
+                grid-template-columns: calc(27.5% - 6px) calc(27.5% - 6px) calc(45% - 12px);
+               
+            }
+        }
+
         &__title{
             font-size: 12px;
             font-weight: bold;

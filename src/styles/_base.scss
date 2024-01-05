@@ -54,21 +54,36 @@ input{
 input[type="submit"]{
   width: fit-content;
 }
+
+.formkit-input:not([type="submit"]){
+  padding: 0 11px;
+}
+
 .formkit-input[type="submit"]{
   width: 100%;
   background-color: $brand-blue;
   color: black;
   height: 36px;
   font-size: 16px;
+  border: 1px solid $brand-blue;
+  transition: 0.35s ease-in-out;
   &:hover{
     cursor: pointer;
+    background-color: darken($brand-blue, 20%);
+  }
+}
+.formkit-outer{
+  font-size: 12px;
+
+  .formkit-label{
+    font-weight: 600;
+  }
+  .formkit-inner{
+    margin-top: 5px;
   }
 }
 .formkit-outer[data-invalid="true"]{
-  font-size: 12px;
-  .formkit-label{
-    font-weight: 700;
-  }
+  
   .formkit-message{
     color: red;
     font-size: 12px;

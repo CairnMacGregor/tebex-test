@@ -4,8 +4,7 @@
           <div  class = "checkout__half-inner left">
             <div class = "checkout__helf-inner--wrapper" v-if="loadingData === false && basket?.products" >
               <BasketSummary ref="basketSummaryForm" :basket="basket?.products"></BasketSummary>
-              
-              <CouponForm></CouponForm>
+              <CouponForm :basketID="parseInt(basket?.id)"></CouponForm>
               <OrderSummary v-if="loadingData === false && basket" :summary="basket"></OrderSummary>
             </div>
             <div class = "checkout__empty" v-else-if="loadingData === false && !basket?.products">
@@ -37,7 +36,6 @@
 
         &__loading{
           &-title{
-            font-family: 'lato';
             font-size: 12px;
             font-weight: bold;
             margin-bottom: 20px;
@@ -49,7 +47,6 @@
           flex-direction: column;
           gap: 20px;
           &-title{
-            font-family: 'lato';
             font-size: 12px;
             font-weight: bold;
             margin-bottom: 20px;
@@ -107,6 +104,8 @@ import PaymentForm from '../components/PaymentForm.vue';
 import { ref, onMounted, nextTick } from 'vue';
 import DataService from '../utils/DataServices.js';
 import Loader from '../components/Loader.vue';
+import useCustomToast from '../utils/useToast';
+
 const DataServices = new DataService();
 export default {
   components: {
@@ -121,19 +120,21 @@ export default {
     const basket = ref(null);
     let basketSummaryForm = ref(null);
     let paymentForm = ref(null);
-
+    const { showToast } = useCustomToast();
 
     const fetchBasket = async () => {
       try {
         DataServices.get('/api/basket', {})
           .then(response => {
-            basket.value = response;
+            showToast(response.message, response.success ? "success" : "error", 'top-right', 3500);
+            basket.value = response.data;
             loadingData.value = false;
             nextTick(() => {
               setHeight();
             });
           })
           .catch(error => {
+            showToast("Something went wrong while fetching your basket, please try again","error", 'top-right', 3500);
             console.log(error);
           });
       } catch (error) {
