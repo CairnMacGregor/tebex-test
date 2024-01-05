@@ -1,0 +1,21 @@
+.container{
+    max-width: $container-width;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+
+    &:has(> .row){
+        display: flex;
+        flex-direction: row;
+    }
+
+    .row{
+        max-width: 50%;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.light-background{
+    background-color: $brand-grey;
+}

@@ -1,0 +1,76 @@
+:root {
+    font-family: Lato;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #000000;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+body{
+    min-height: 100dvh;
+}
+
+*, *:before, *:after {
+box-sizing: inherit;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input{
+  height: 36px;
+  color: $form-field-text;
+  background-color: $form-field-grey;
+  border: 1px solid $form-field-border;
+  border-radius: 2px;
+  width: 100%;
+  font-size: 12px;
+}
+
+input[type="submit"]{
+  width: fit-content;
+}
+.formkit-input[type="submit"]{
+  width: 100%;
+  background-color: $brand-blue;
+  color: black;
+  height: 36px;
+  font-size: 16px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+.formkit-outer[data-invalid="true"]{
+  font-size: 12px;
+  .formkit-label{
+    font-weight: 700;
+  }
+  .formkit-message{
+    color: red;
+    font-size: 12px;
+  }
+}
