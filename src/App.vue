@@ -15,13 +15,13 @@ export default {
   setup() {
     const BasketServices = new BasketService();
     const store = useBasketStore();
-    const isBasketLoaded = ref(false); 
+    const isBasketLoaded = ref(false);
     const route = useRoute();
     const position = computed(() => {
       return route.meta.position;
     });
     onMounted(async () => {
-      if(store.basket === null || store.basket === undefined){
+      if (store.basket === null || store.basket === undefined) {
         const fetchedBasket = await BasketServices.fetchBasket();
         store.setBasket(fetchedBasket);
       }
@@ -38,18 +38,17 @@ export default {
 </script>
 
 <template>
-   <router-view v-slot="{ Component }">
-      <transition name="fade" mode="out-in">
-        <div :key="$route.name">
-          <TopNav :position="position"></TopNav>
-          <component :is="Component" v-if="isBasketLoaded"></component>
-        </div>
-      </transition>
-    </router-view>
+  <router-view v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <div :key="$route.name">
+        <TopNav :position="position"></TopNav>
+        <component :is="Component" v-if="isBasketLoaded"></component>
+      </div>
+    </transition>
+  </router-view>
 </template>
 
 <style scoped>
-
 .logo {
   height: 4em;
   padding: 1.5em;

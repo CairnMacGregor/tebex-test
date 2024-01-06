@@ -4,14 +4,14 @@ export default class DataService {
         try {
             const response = await fetch(endpoint);
             const data = await response.json();
-            if(data){
+            if (data) {
                 return {
                     success: true,
                     data: data,
                     showToast: true,
                     message: "Data fetched successfully",
                 };
-                
+
             }
         } catch (error) {
             return {
@@ -33,7 +33,7 @@ export default class DataService {
             });
             const responseData = await response.json();
 
-            if(responseData){
+            if (responseData) {
                 return {
                     success: responseData.success,
                     data: responseData,
@@ -45,7 +45,7 @@ export default class DataService {
                 success: false,
                 message: error.message
             };
-            
+
         }
     }
 }

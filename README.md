@@ -5,8 +5,7 @@
 Still run the api with `npm run api`
 Still run the client with `npm run dev`
 
-
-I've completed the test, approaching it as if it were a component of a larger application. This perspective influenced my decision to use Pinia and Vue router. 
+I've completed the test, approaching it as if it were a component of a larger application. This perspective influenced my decision to use Pinia and Vue router.
 
 In the `BasketServices.js` file, I envisioned the potential for additional functions such as `addItem`, `removeItem`, `validateStockLevels`, etc. The store was used to manage the server response across different pages in the application, demonstrating its potential in a larger-scale project.
 
@@ -16,9 +15,13 @@ In the checkout you may notice that the sales tax uses `£` instead of `$`. I co
 
 ![Alt text](image.png)
 
+With the totals, I would have liked to have a pre-discount value and a post-discount value, and although I could calculate that in the frontend i feel like it should come from the backend and just be rendered in the front end.
+I did consider it however.
 
 **Styling**
+
 - I incorporated core styling using SCSS, primarily through variables and small utilities. However, to maintain component encapsulation, most of the CSS is contained within the respective component.
 
-**Testing** 
+**Testing**
+
 - Basic tests have been added using `vitest`, focusing on the `BasketService`. Given that `BasketService` is the core of this application from a functionality standpoint and it leverages `DataServices`, these tests should cover most of the functionality related to endpoint interactions.

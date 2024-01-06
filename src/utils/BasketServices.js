@@ -7,28 +7,28 @@ export default class BasketService {
     async fetchBasket(url = '/api/basket') {
         let data;
         await DataServices.get(url, {})
-          .then(response => {
-            data = response.data;
-          })
-          .catch(error => {
-            showToast("Something went wrong while fetching your basket, please try again","error", 'top-right', 3500);
-        });
+            .then(response => {
+                data = response.data;
+            })
+            .catch(error => {
+                showToast("Something went wrong while fetching your basket, please try again", "error", 'top-right', 3500);
+            });
         return data;
     };
 
-    async submitCouponForm(basket, couponCode, url = `/api/basket/${basket.id}/coupon`){
+    async submitCouponForm(basket, couponCode, url = `/api/basket/${basket.id}/coupon`) {
         let data;
-        await DataServices.post(url, {code: couponCode})
+        await DataServices.post(url, { code: couponCode })
             .then(response => {
-                if(response.success){
+                if (response.success) {
                     data = response.data;
-                    showToast(response.message,"success", 'top-right', 3500);
+                    showToast(response.message, "success", 'top-right', 3500);
                 } else {
                     data = {
-                        success:false,
+                        success: false,
                         message: response.message
                     }
-                    showToast(response.message,"warning", 'top-right', 3500);
+                    showToast(response.message, "warning", 'top-right', 3500);
                 }
             })
             .catch(error => {
@@ -37,23 +37,23 @@ export default class BasketService {
         return data;
     };
 
-    async checkout(basket, params, url = `/api/basket/${basket.id}/checkout`){
+    async checkout(basket, params, url = `/api/basket/${basket.id}/checkout`) {
         let data;
-        await DataServices.post(url, {...params})
+        await DataServices.post(url, { ...params })
             .then(response => {
-                if(response.success){
+                if (response.success) {
                     data = response.data;
-                    showToast("Success! Your transaction has been accepted.","success", 'top-right', 3500);
+                    showToast("Success! Your transaction has been accepted.", "success", 'top-right', 3500);
                 } else {
                     data = {
-                        success:false,
+                        success: false,
                         message: response.message
                     }
-                    showToast(response.message,"warning", 'top-right', 3500);
+                    showToast(response.message, "warning", 'top-right', 3500);
                 }
             })
             .catch(error => {
-              console.error(error); 
+                console.error(error);
             });
         return data;
     };

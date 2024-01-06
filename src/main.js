@@ -11,24 +11,24 @@ import router from './router'
 const app = createApp(App)
 
 app.use(plugin, defaultConfig({
-    plugins: [
-      createAutoAnimatePlugin(
-        { 
-          duration: 250,
-          easing: 'ease-in-out',
-          delay: 0,
-        },
-        { 
-          global: ['outer', 'inner'],
-          form: ['form'],
-          repeater: ['items'],
-        }
-      )
-    ]
-  }))
-.use(ToastPlugin)
-.use(VueTheMask)
-.use(createPinia())
-.use(router);
+  plugins: [
+    createAutoAnimatePlugin(
+      {
+        duration: 250,
+        easing: 'ease-in-out',
+        delay: 0,
+      },
+      {
+        global: ['outer', 'inner'],
+        form: ['form'],
+        repeater: ['items'],
+      }
+    )
+  ]
+}))
+  .use(ToastPlugin)
+  .use(VueTheMask)
+  .use(createPinia())
+  .use(router);
 
 app.mount('#app')

@@ -1,13 +1,13 @@
-import {defineStore} from 'pinia';
+import { defineStore } from 'pinia';
 
 export const useBasketStore = defineStore('basketStore', {
 
-    state: () => ({ 
+    state: () => ({
         basket: localStorage.getItem('basket') != "undefined" ? JSON.parse(localStorage.getItem('basket')) : null,
     }),
-    actions:{
+    actions: {
         setBasket(basket) {
-            if(basket === null || basket === undefined) {
+            if (basket === null || basket === undefined) {
                 localStorage.removeItem('basket');
                 return;
             }

@@ -30,8 +30,8 @@ test('Check to see if correct coupon is applied correctly', async () => {
     expect(response?.message).toEqual('Your Coupon "25OFF" has been succesfully applied, your basket has been updated');
     expect(response?.data.couponCode).toEqual("25OFF");
 });
-  
-  
+
+
 
 test('Check to see if blank coupon is handled correctly', async () => {
     const BasketServices = new BasketService();
@@ -57,12 +57,12 @@ test('Check to see if catches missing params properly', async () => {
 test('Check to see if can checkout correctly', async () => {
     const BasketServices = new BasketService();
     let data = {
-        "cardCvc" : "1111",
-        "cardExpiry" : "11/25",
-        "cardNumber" : "1111 1111 1111 1111",
-        "email" : "cairn@test.test",
-        "nameOnCard" : "Cairn MacGregor",
-        "postalCode" : "ML3 8TU" 
+        "cardCvc": "1111",
+        "cardExpiry": "11/25",
+        "cardNumber": "1111 1111 1111 1111",
+        "email": "cairn@test.test",
+        "nameOnCard": "Cairn MacGregor",
+        "postalCode": "ML3 8TU"
     }
     let response = await BasketServices.checkout(basket, data, `http://localhost:3000/api/basket/${basket.id}/checkout`);
     expect(response?.success).toEqual(true);
