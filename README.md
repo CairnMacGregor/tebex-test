@@ -2,6 +2,10 @@
 
 ## Cairn's Notes
 
+Still run the api with `npm run api`
+Still run the client with `npm run dev`
+
+
 I've completed the test, approaching it as if it were a component of a larger application. This perspective influenced my decision to use Pinia and Vue router. 
 
 In the `BasketServices.js` file, I envisioned the potential for additional functions such as `addItem`, `removeItem`, `validateStockLevels`, etc. The store was used to manage the server response across different pages in the application, demonstrating its potential in a larger-scale project.
