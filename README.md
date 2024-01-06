@@ -22,5 +22,3 @@ In the checkout you may notice that the sales tax uses `£` instead of `$`. I co
 
 **Testing** 
 - Basic tests have been added using `vitest`, focusing on the `BasketService`. Given that `BasketService` is the core of this application from a functionality standpoint and it leverages `DataServices`, these tests should cover most of the functionality related to endpoint interactions.
-
-- When testing ignore the error relating to the document. That's just because the Toast can't be displayed since the tests run in NodeJS and the Toast is looking for the document to attach to.
