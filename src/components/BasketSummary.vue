@@ -15,7 +15,7 @@
         margin-bottom: 25px;
         &__title{
             font-size: 12px;
-            font-weight: bold;
+            font-weight: $font-bold;
             margin-bottom: 20px;
         }
 

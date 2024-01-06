@@ -52,7 +52,7 @@
         margin-bottom: 24px;
         &__title{
             font-size: 12px;
-            font-weight: bold;
+            font-weight: $font-bold;
             margin-bottom: 5px;
         }
 
@@ -65,13 +65,13 @@
         &__input{
             padding: 8px;
             font-size: 12px;
-            font-weight: 300;
+            font-weight: $font-regular;
         }   
 
         &__submit{
             padding: 8px;
             font-size: 12px;
-            font-weight: 300;
+            font-weight: $font-regular;
             background-color: #fff;
             color: $submit-text;
             transition: 0.35s ease-in-out;

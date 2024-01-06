@@ -41,11 +41,11 @@
             flex-direction: row;
             justify-content: space-between;
             font-size: 12px;
-            font-weight: 300;
+            font-weight: $font-regular;
 
             &:last-of-type{
                 font-size: 20px;
-                font-weight: 700;
+                font-weight: $font-bold;
             }
         }
     }

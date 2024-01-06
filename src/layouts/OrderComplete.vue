@@ -71,7 +71,7 @@
             }
 
             &-title{
-                font-weight: 600;
+                font-weight: $font-bold;
                 font-size: 26px;
                 margin: 0;
                 padding: 0;
@@ -99,7 +99,7 @@
 
                 }
                 span{
-                    font-weight: 600;
+                    font-weight: $font-bold;
                 }
             }
         }

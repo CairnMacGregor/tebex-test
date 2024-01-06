@@ -32,19 +32,19 @@
 
             &-name{
                 font-size: 14px;
-                font-weight: 500;
+                font-weight: $font-semi-bold;
             }
 
             &-qty{
                 font-size: 12px;
-                font-weight: 300;
+                font-weight: $font-regular;
             }
         }
 
         &__price{
             margin: auto 0 0 auto;
             font-size: 12px;
-            font-weight: 300;
+            font-weight: $font-regular;
         }
     }
 </style>

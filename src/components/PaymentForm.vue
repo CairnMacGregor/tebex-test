@@ -148,7 +148,7 @@
 
         &__title{
             font-size: 12px;
-            font-weight: bold;
+            font-weight: $font-bold;
             margin-bottom: 20px;
             color: $dull-text-color;
             &--colored{

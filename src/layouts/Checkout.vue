@@ -42,7 +42,7 @@
         &__loading{
           &-title{
             font-size: 12px;
-            font-weight: bold;
+            font-weight: $font-bold;
             margin-bottom: 20px;
           }
 
@@ -55,7 +55,7 @@
           gap: 20px;
           &-title{
             font-size: 12px;
-            font-weight: bold;
+            font-weight: $font-bold;
             margin-bottom: 20px;
           }  
 
@@ -67,7 +67,7 @@
             width: fit-content;
             padding: 10px 40px;
             font-size: 12px;
-            font-weight: 300;
+            font-weight: $font-regular;
             background-color: $brand-blue;
             color: #fff;
             transition: 0.35s ease-in-out;

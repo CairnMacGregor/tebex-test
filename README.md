@@ -1,137 +1,22 @@
 # Tebex Front End Quest
 
-Greetings, adventurer! Embark upon this tech task as a noble quest.
+## Cairn's Notes
 
-## Overview
+I've completed the test, approaching it as if it were a component of a larger application. This perspective influenced my decision to use Pinia and Vue router. 
 
-We would like you to create a simple front-end for a checkout using the Figma designs provided. In this project there are APIs that will enable you to complete the task.
+In the `BasketServices.js` file, I envisioned the potential for additional functions such as `addItem`, `removeItem`, `validateStockLevels`, etc. The store was used to manage the server response across different pages in the application, demonstrating its potential in a larger-scale project.
 
-You may use any tools/libraries you need to help you to complete this quest!
+To ensure data persistence across page navigation and refreshes, all data in the store is also saved to local storage. This is also due to me treating this test as part of a larger application.
 
-### What are we looking for?
+In the checkout you may notice that the sales tax uses `£` instead of `$`. I copied the design for this on purpose, normally i'd just change it over.
 
-- Does the end product look exactly like the designs?
-- Does the product work as expected?
-- Is the code clean, consistent and extensible?
+![Alt text](image.png)
 
-**Bonus** if you feel like you have time you might consider the following as bonus
 
-- Add unit tests or e2e tests
-- Consider responsive design, how does it look on mobile?
+**Styling**
+- I incorporated core styling using SCSS, primarily through variables and small utilities. However, to maintain component encapsulation, most of the CSS is contained within the respective component.
 
-Ready to get started?
+**Testing** 
+- Basic tests have been added using `vitest`, focusing on the `BasketService`. Given that `BasketService` is the core of this application from a functionality standpoint and it leverages `DataServices`, these tests should cover most of the functionality related to endpoint interactions.
 
-### Setup
-
-```shell
-npm install
-```
-
-Launch the APIs this will run on port 3000
-
-```
-npm run api
-```
-
-This project uses vite to run the dev server execute
-
-```
-npm run dev
-```
-
-### API endpoints
-
-There are 3 endpoints
-
-The first to `GET` the basket with the selected products and price information. The second is a `POST` endpoint to submit the checkout, more information can be found below. Lastly there is a `POST` coupon endpoint that will apply a discount to the basket and return the updated basket.
-
-Be sure to pass the `Content-Type` header of `application/json` when performing the post requests.
-
-#### Get basket endpoint
-
-```text
-GET  /api/basket
-```
-
-This will return
-
-```json
-{
-  "id": "1",
-  "products": [
-    {
-      "name": "Medium Booster",
-      "price": 9.99,
-      "image": "medium_booster.png",
-      "quantity": 1
-    },
-    {
-      "name": "Small Coins",
-      "price": 4.99,
-      "image": "small_coins.png",
-      "quantity": 1
-    }
-  ],
-  "couponCode": null,
-  "subTotal": 14.98,
-  "salesTax": 3.00,
-  "total": 17.98,
-}
-```
-
-#### Apply coupon endpoint
-
-```text
-POST  /api/basket/:id/coupon
-Body: 
-{
-    "code": "25OFF"
-}
-```
-
-This will return the basket along with the applied discount, use code 25OFF for 25% off the total price.
-
-```json
-{
-  "id": "1",
-  "products": [
-    {
-      "name": "Medium Booster",
-      "price": 9.99,
-      "image": "medium_booster.png",
-      "quantity": 1
-    },
-    {
-      "name": "Small Coins",
-      "price": 4.99,
-      "image": "small_coins.png",
-      "quantity": 1
-    }
-  ],
-  "couponCode": "25OFF",
-  "subTotal": 11.24,
-  "salesTax": 2.25,
-  "total": 13.48
-}
-```
-
-#### Complete checkout endpoint
-
-```text
-POST  /api/basket/:id/checkout
-Body:
-{
-    cardCvc: "123",
-    cardExpiry: "01/24",
-    cardNumber: "1111222233334444",
-    email: "john.doe@example.com",
-    nameOnCard: "John Doe",
-    postalCode: "SW1W 0NY"
-}
-```
-
-This will return
-
-```json
-{ "success": true, "transactionId": "tbx-6a6da59ebfa86d3d106fb68be75c0fd7" }
-```
+- When testing ignore the error relating to the document. That's just because the Toast can't be displayed since the tests run in NodeJS and the Toast is looking for the document to attach to.
