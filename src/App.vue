@@ -21,7 +21,7 @@ export default {
       return route.meta.position;
     });
     onMounted(async () => {
-      if(store.basket === null){
+      if(store.basket === null || store.basket === undefined){
         const fetchedBasket = await BasketServices.fetchBasket();
         store.setBasket(fetchedBasket);
       }
