@@ -134,11 +134,9 @@ import CouponForm from '../components/CouponForm.vue';
 import OrderSummary from '../components/OrderSummary.vue';
 import PaymentForm from '../components/PaymentForm.vue';
 import { ref, onMounted, onBeforeUnmount, nextTick, computed } from 'vue';
-import DataService from '../utils/DataServices.js';
 import Loader from '../components/Loader.vue';
 
 import { useBasketStore } from '../stores/BasketStore';
-const DataServices = new DataService();
 export default {
   components: {
     BasketSummary,
@@ -161,7 +159,6 @@ export default {
           basketSummaryForm.value.$el.style.minHeight = `${paymentFormHeight}px`;
         } else {
           basketSummaryForm.value.$el.style.minHeight = `auto`;
-        
         }
       }
     };

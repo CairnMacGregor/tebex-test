@@ -83,7 +83,7 @@
 </template>
 
 <script setup>
-    import { defineProps, computed, ref} from 'vue';
+    import { computed, ref} from 'vue';
     import BasketService from '../utils/BasketServices';
     import { useBasketStore } from '../stores/BasketStore';
     import Loader from './Loader.vue';
