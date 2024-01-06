@@ -9,32 +9,40 @@
 </template>
 
 <script setup>
-    import DataService from '../utils/DataServices.js';
+    import BasketService from '../utils/BasketServices.js';
     import { ref} from 'vue';
+    import { useBasketStore } from '../stores/BasketStore';
+    const BasketServices = new BasketService();
+    const basketStore = useBasketStore();
+
     let couponCode = ref('');
     let loadingData = ref(false);
-    const DataServices = new DataService();
 
     const props = defineProps({
-        basketID: {
-            type: Number,
+        basket: {
+            type: Object,
             default: null
         }
     });
 
-    console.log(props.basketID);
-    const submitCouponForm = (e) => {
-        e.preventDefault();
-        loadingData.value = true;   
-        DataServices.post(`/api/basket/${props.basketID}/coupon`, {code: couponCode.value})
-            .then(response => {
-              loadingData.value = false;
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        
-    }
+    const submitCouponForm = async (e) => {
+      e.preventDefault();
+        if (!couponCode.value.trim()) {
+            return;
+        }
+      loadingData.value = true;
+      try {
+        const response = await BasketServices.submitCouponForm(props.basket, couponCode.value);
+        if(response?.success){
+            basketStore.setBasket(response.data);
+            couponCode.value = '';
+        }
+      } catch (error) {
+        console.error(error); 
+      }
+      loadingData.value = false;
+    };
+    
 
 </script>
 

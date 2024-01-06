@@ -73,11 +73,15 @@ fastify.post(
             const total = subTotal + salesTax;
 
             return {
-                ...basket,
-                couponCode: request.body.code,
-                subTotal: round(subTotal, 2),
-                salesTax: round(salesTax, 2),
-                total: round(total, 2),
+                success:true,
+                message: `Your Coupon "${request.body.code.toUpperCase()}" has been succesfully applied, your basket has been updated`,
+                data: {
+                    ...basket,
+                    couponCode: request.body.code,
+                    subTotal: round(subTotal, 2),
+                    salesTax: round(salesTax, 2),
+                    total: round(total, 2),
+                }
             };
         }
     }

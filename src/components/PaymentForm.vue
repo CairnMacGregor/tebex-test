@@ -4,10 +4,13 @@
         <FormKit 
             type="form"  
             :actions="false"
-            #default="{ disabled }" 
+            :disabled="disabled"
+            #default="{ disabled }"
             class="payment-form__form"
+            @submit="submitPaymentForm"
         >
             <FormKit
+                name="email"
                 type="email"
                 label="Email*"
                 validation="required|email"
@@ -16,6 +19,7 @@
                   required: 'Please enter your email address.'}"
             />
             <FormKit
+                name="cardNumber"
                 type="tel"
                 label="Card number*"
                 autocomplete="cc-number" 
@@ -27,6 +31,7 @@
             />
             <div class="form-group">
                 <FormKit
+                    name="cardExpiry"
                     type="text"
                     label="Expiry Date*"
                     validation="required"
@@ -37,6 +42,7 @@
                     }"
                 />
                 <FormKit
+                    name="cardCvc"
                     type="text"
                     label="CVC/CVV*"
                     validation="required"
@@ -48,6 +54,7 @@
                       required: 'Please enter your CVC/CVV number.'}"
                 />
                 <FormKit
+                    name="postalCode"
                     type="text"
                     label="Zip Code/Postal Code*"
                     validation="required"
@@ -57,6 +64,7 @@
                 />
             </div>
             <FormKit
+                    name="nameOnCard"
                     type="text"
                     label="Name on card*"
                     validation="required"
@@ -64,20 +72,48 @@
                     :validation-messages="{
                       required: 'Please enter the name on your card.'}"
                 />
-            <FormKit
+            <FormKit v-if="!loadingData"
               type="submit"
               label="Pay by Card"
+              :disabled="disabled"
             />
+            <Loader v-else></Loader>
         </Formkit>
     </section>
 </template>
 
 <script setup>
-    import { defineProps, ref, watch } from 'vue';
-
+    import { defineProps, computed, ref} from 'vue';
+    import BasketService from '../utils/BasketServices';
+    import { useBasketStore } from '../stores/BasketStore';
+    import Loader from './Loader.vue';
+    import { useRouter } from 'vue-router';
+    const BasketServices = new BasketService();
+    const basketStore = useBasketStore();
+    const basket = computed(() => basketStore.basket);
+    const loadingData = ref(false);
     const props = defineProps({
         disabled: Boolean
     });
+
+    const router = useRouter(); 
+
+    const submitPaymentForm = async (data) => {
+
+      loadingData.value = true;
+      try {
+        const response = await BasketServices.checkout(basket.value, data);
+        if(response?.success){
+            basketStore.setTransactionId(response.transactionId);
+            loadingData.value = false;
+
+            router.push({ name: 'order-complete', params: { "transactionId": basket.value.transactionId } });
+        }
+      } catch (error) {
+        console.error(error); 
+        loadingData.value = false;
+      }
+    }
 
 </script>
 

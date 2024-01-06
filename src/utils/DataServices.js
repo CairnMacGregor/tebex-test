@@ -8,6 +8,7 @@ export default class DataService {
                 return {
                     success: true,
                     data: data,
+                    showToast: true,
                     message: "Data fetched successfully",
                 };
                 
@@ -15,7 +16,8 @@ export default class DataService {
         } catch (error) {
             return {
                 success: false,
-                message: error.message
+                showToast: false,
+                message: "Something went wrong while fetching product data"
             }
         }
     }
@@ -29,9 +31,15 @@ export default class DataService {
                 },
                 body: JSON.stringify(data)
             });
-
             const responseData = await response.json();
-
+            if(responseData){
+                return {
+                    success: responseData.success,
+                    data: responseData,
+                    message: responseData.message
+                };
+                
+            }
         } catch (error) {
             return {
                 success: false,

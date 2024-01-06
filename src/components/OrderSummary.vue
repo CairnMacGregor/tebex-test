@@ -3,25 +3,31 @@
         <!-- I'm aware the currencies are different, but that's how it is in the design -->
         <div class = "summary__section">
             <p>Subtotal:</p>
-            <p>${{ summary?.subTotal.toFixed(2) }}</p>
+            <p>${{ basket?.subTotal.toFixed(2) }}</p>
         </div>
-        <div class = "summary__section">
 
+        <div class = "summary__section">
             <p>Sales Tax:</p>
-            <p>£{{ summary?.salesTax.toFixed(2) }}</p>
+            <p>£{{ basket?.salesTax.toFixed(2) }}</p>
         </div>
-        <div class = "summary__section">
 
+        <div v-if="basket.couponCode" class = "summary__section">
+            <p>Coupon Code:</p>
+            <p>{{ basket.couponCode }}</p>
+        </div>
+
+        <div class = "summary__section">
             <p>Total Price:</p>
-            <p>${{ summary?.total.toFixed(2) }}</p>
+            <p>${{ basket?.total.toFixed(2) }}</p>
         </div>
     </div>
 </template>
 
 <script setup>
-    const props = defineProps({
-        summary: Object
-    });
+    import { computed } from 'vue';
+    import { useBasketStore } from '../stores/BasketStore';
+    const basketStore = useBasketStore();
+    const basket = computed(() => basketStore.basket);
 
 </script>
 

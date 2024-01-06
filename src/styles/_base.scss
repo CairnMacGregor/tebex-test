@@ -18,6 +18,9 @@ html {
     font-size: 16px;
 }
 
+#app{
+  height: 100%;
+}
 body{
     min-height: 100dvh;
 }
@@ -67,6 +70,13 @@ input[type="submit"]{
   font-size: 16px;
   border: 1px solid $brand-blue;
   transition: 0.35s ease-in-out;
+
+  &:disabled{
+    pointer-events: none;
+    &:hover{
+      cursor: not-allowed;
+    }
+  }
   &:hover{
     cursor: pointer;
     background-color: darken($brand-blue, 20%);
