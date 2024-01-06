@@ -34,11 +34,13 @@
                     name="cardExpiry"
                     type="text"
                     label="Expiry Date*"
-                    validation="required"
+                    validation="required|date:future"
+                    :validation-rules="{ date }"
                     placeholder="MM/YY"
                     v-mask="'##/##'"
                     :validation-messages="{
-                      required: 'Please enter your card\'s expiry date.'
+                      required: 'Please enter your card\'s expiry date.',
+                      date: 'Please enter a valid expiry date.'
                     }"
                 />
                 <FormKit
@@ -113,6 +115,25 @@
         console.error(error); 
         loadingData.value = false;
       }
+    }
+
+    function date(node) {
+        const value = node.value;
+        if(value.length === 5){
+            const [month, year] = value.split('/');
+            const expiryDate = new Date(`20${year}`, month - 1); 
+            const currentDate = new Date();
+            currentDate.setDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate());
+            if(month > 12 || month < 1){
+                return false;
+            }
+
+            if (expiryDate < currentDate) {
+                return false;
+            }
+            return true;
+        }
+        
     }
 
 </script>

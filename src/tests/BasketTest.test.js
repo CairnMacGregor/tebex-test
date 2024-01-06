@@ -51,7 +51,6 @@ test('Check to see if wrong coupon is handled correctly', async () => {
 test('Check to see if catches missing params properly', async () => {
     const BasketServices = new BasketService();
     let response = await BasketServices.checkout(basket, null, `http://localhost:3000/api/basket/${basket.id}/checkout`);
-    console.log("Message: " + response);
     expect(response?.message).toEqual("body must have required property 'email'");
 });
 
@@ -66,5 +65,7 @@ test('Check to see if can checkout correctly', async () => {
         "postalCode" : "ML3 8TU" 
     }
     let response = await BasketServices.checkout(basket, data, `http://localhost:3000/api/basket/${basket.id}/checkout`);
-        console.log(response);
+    expect(response?.success).toEqual(true);
+    expect(response?.transactionId).not.toBeNull();
+
 });
